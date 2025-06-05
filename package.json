@@ -1,55 +1,74 @@
 {
   "name": "read-tailwind",
-  "displayName": "read-tailwind",
-  "description": "",
+  "displayName": "Read Tailwind",
+  "description": "Tailwindのクラス一覧を表示する拡張機能",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.100.0"
+    "vscode": "^1.60.0"
   },
   "categories": [
     "Other"
   ],
   "activationEvents": [
-  "onLanguage:javascript",
-  "onLanguage:javascriptreact",
-  "onLanguage:typescriptreact",
-  "onLanguage:html"
-],
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact",
+    "onLanguage:html",
+    "onLanguage:Vue",
+    "onLanguage:svelte"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "read-tailwind.showClasses",
-        "title": "Tailwind-List"
+        "title": "Tailwind: 行のクラス詳細を表示"
+      },
+      {
+        "command": "read-tailwind.reverseSearchClasses",
+        "title": "Tailwind: CSS/日本語説明からクラスを逆引き検索"
       }
-    ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "editorFocus",
-          "command": "read-tailwind.showClasses",
-          "group": "myGroup@1"
-        }
-      ]
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
+    "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/vscode": "^1.100.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
-    "@typescript-eslint/eslint-plugin": "^8.25.0",
-    "@typescript-eslint/parser": "^8.25.0",
-    "eslint": "^9.21.0",
-    "typescript": "^5.7.3",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@types/node": "^16.x",
+    "@types/vscode": "^1.60.0",
+    "typescript": "^4.x"
+  },
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2020",
+    "outDir": "out",
+    "lib": [
+      "ES2020"
+    ],
+    "sourceMap": true,
+    "rootDir": "src",
+    "strict": true
+  },
+  "exclude": [
+    "node_modules",
+    ".vscode-test"
+  ],
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "拡張機能を実行",
+        "type": "extensionHost",
+        "request": "launch",
+        "args": [
+          "--extensionDevelopmentPath=${workspaceFolder}"
+        ],
+        "outFiles": [
+          "${workspaceFolder}/out/**/*.js"
+        ]
+      }
+    ]
   }
 }
