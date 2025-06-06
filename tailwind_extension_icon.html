@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Japanese Tailwind Dictionary Icon</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        background: #f3f4f6;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .icon-container {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .icon {
+        width: 128px;
+        height: 128px;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          #0ea5e9 0%,
+          #06b6d4 50%,
+          #10b981 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .magnifier {
+        width: 70px;
+        height: 70px;
+        border: 4px solid white;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .magnifier::after {
+        content: "";
+        position: absolute;
+        bottom: -16px;
+        right: -16px;
+        width: 24px;
+        height: 6px;
+        background: white;
+        border-radius: 3px;
+        transform: rotate(45deg);
+      }
+
+      .tailwind-in-magnifier {
+        width: 40px;
+        height: 40px;
+        fill: white;
+      }
+
+      .decorative-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .element {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 2px;
+      }
+
+      .element1 {
+        width: 16px;
+        height: 2px;
+        top: 20px;
+        right: 16px;
+        transform: rotate(45deg);
+      }
+
+      .element2 {
+        width: 12px;
+        height: 2px;
+        top: 16px;
+        left: 20px;
+        transform: rotate(-30deg);
+      }
+
+      .element3 {
+        width: 8px;
+        height: 8px;
+        bottom: 24px;
+        right: 20px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .element4 {
+        width: 6px;
+        height: 6px;
+        bottom: 20px;
+        left: 16px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .download-section {
+        text-align: center;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .download-btn {
+        background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 14px;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+      }
+
+      .icon-info {
+        margin-top: 10px;
+        color: #6b7280;
+        font-size: 14px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  </head>
+  <button class="download-btn" id="downloadPngBtn">PNGでダウンロード</button>
+  <script>
+    document.getElementById("downloadPngBtn").onclick = function () {
+      const icon = document.getElementById("icon");
+      html2canvas(icon, {
+        width: 128,
+        height: 128,
+        backgroundColor: null,
+        scale: 1,
+      }).then((canvas) => {
+        // PNGダウンロード
+        const a = document.createElement("a");
+        a.href = canvas.toDataURL("image/png");
+        a.download = "tailwind_extension_icon.png";
+        a.click();
+      });
+    };
+  </script>
+  <body>
+    <div class="icon-container">
+      <div class="icon" id="icon">
+        <div class="decorative-elements">
+          <div class="element element1"></div>
+          <div class="element element2"></div>
+          <div class="element element3"></div>
+          <div class="element element4"></div>
+        </div>
+        <div class="icon-content">
+          <div class="search-container">
+            <div class="magnifier">
+              <svg
+                class="tailwind-in-magnifier"
+                viewBox="0 0 54 33"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M27 0c-7.2 0-11.7 3.6-13.5 10.8 2.7-3.6 5.85-4.95 9.45-4.05 2.054.513 3.522 2.004 5.147 3.653C30.744 13.09 33.808 16.2 40.5 16.2c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C36.756 3.11 33.692 0 27 0zM13.5 16.2C6.3 16.2 1.8 19.8 0 27c2.7-3.6 5.85-4.95 9.45-4.05 2.054.514 3.522 2.004 5.147 3.653C17.244 29.29 20.308 32.4 27 32.4c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C23.256 19.31 20.192 16.2 13.5 16.2z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
