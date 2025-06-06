@@ -3,3 +3,7 @@
 - Initial release
 - Tailwind クラス数の自動取得を設定（readTailwind.autoCountClasses）で ON/OFF できるように対応
 - クラス数自動取得処理の追加
+
+ver 0.2.0
+
+- アイコンを変更
