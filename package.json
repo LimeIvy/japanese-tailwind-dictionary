@@ -1,7 +1,7 @@
 {
   "name": "japanese-tailwind-dictionary",
   "displayName": "Japanese Tailwind Dictionary",
-  "description": "Tailwindのクラスを日本語訳したり、日本語で逆引き検索できるVSCode拡張機能。主要クラス網羅・日本語解説・右上アイコン・コマンドパレット対応。",
+  "description": "Tailwindのクラスを日本語訳したり、CSSや日本語でクラスを検索できるVSCode拡張機能。主要クラス網羅・日本語解説・右上アイコン・コマンドパレット対応。",
   "publisher": "LimeIvy",
   "icon": "images/title.png",
   "homepage": "https://github.com/LimeIvy/japanese-tailwind-dictionary",
@@ -23,7 +23,7 @@
     "translate",
     "vscode"
   ],
-  "version": "0.1.2",
+  "version": "0.1.5",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -44,12 +44,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "read-tailwind.showClasses",
-        "title": "Tailwind: 行のクラス詳細を表示"
-      },
-      {
-        "command": "read-tailwind.reverseSearchClasses",
-        "title": "Tailwind: CSS/日本語説明からクラスを逆引き検索",
+        "command": "read-tailwind.searchClasses",
+        "title": "Tailwind: CSS/日本語説明からクラスを検索",
         "icon": "images/icon.svg"
       }
     ],
@@ -57,7 +53,7 @@
       "editor/title": [
         {
           "when": "editorLangId =~ /(javascript|javascriptreact|typescriptreact|html|vue|svelte)/",
-          "command": "read-tailwind.reverseSearchClasses",
+          "command": "read-tailwind.searchClasses",
           "group": "navigation"
         }
       ]
@@ -103,5 +99,8 @@
         ]
       }
     ]
+  },
+  "dependencies": {
+    "@vscode/vsce": "^3.5.0"
   }
 }

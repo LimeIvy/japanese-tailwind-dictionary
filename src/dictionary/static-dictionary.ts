@@ -1802,4 +1802,20 @@ export const tailwindClassTranslations: Record<string, TranslationEntry> = {
     css: "outline-offset: 8px;",
     description: "アウトラインのオフセットを8pxにします。",
   },
-}; 
+  container: {
+    css: "width: 100%; max-width: 1280px; margin-left: auto; margin-right: auto;",
+    description: "レスポンシブな中央寄せコンテナを作成します。",
+  },
+  "text-pretty": {
+    css: "text-wrap: pretty;",
+    description: "テキストの折り返しを美しく整えます。",
+  },
+  "text-wrap": {
+    css: "text-wrap: wrap;",
+    description: "テキストの折り返しを有効にします。",
+  },
+  "underline-offset-2": {
+    css: "text-underline-offset: 2px;",
+    description: "下線のオフセットを2pxにします。",
+  }
+};

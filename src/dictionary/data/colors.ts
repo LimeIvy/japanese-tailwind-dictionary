@@ -285,4 +285,6 @@ export const tailwindColors: Record<string, Record<string, string>> = {
     "900": "#881337",
     "950": "#4c0519",
   },
-}; 
+  black: { DEFAULT: "#000" },
+  white: { DEFAULT: "#fff" },
+};
