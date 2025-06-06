@@ -3,10 +3,10 @@
   "displayName": "Japanese Tailwind Dictionary",
   "description": "Tailwindのクラスを日本語訳したり、日本語で逆引き検索できるVSCode拡張機能。主要クラス網羅・日本語解説・右上アイコン・コマンドパレット対応。",
   "publisher": "LimeIvy",
-  "icon": "images/icon.svg",
+  "icon": "images/title.png",
   "galleryBanner": {
-    "color": "#0ea5e9",
-    "theme": "dark"
+    "color": "#40e0d0",
+    "theme": "light"
   },
   "homepage": "https://github.com/LimeIvy/japanese-tailwind-dictionary",
   "repository": {
