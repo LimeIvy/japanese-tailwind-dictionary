@@ -1,4 +1,4 @@
-# Japanese Tailwind Dictionary README
+# Japanese Tailwind Dictionary
 
 ## 🚀 概要
 
@@ -36,6 +36,6 @@
 - フォント: `font-bold`, `font-mono`, `text-xl`, `tracking-wide`, `leading-tight` など
 - 状態・レスポンシブ: `hover:bg-blue-500`, `md:text-lg`, `focus:ring-2` など
 
-随時追加予定
+随時追加予定です
 
 ---
