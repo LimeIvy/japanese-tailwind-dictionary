@@ -1,10 +1,38 @@
 import * as vscode from 'vscode';
-import { TranslationEntry, tailwindClassTranslations, dynamicTranslationGenerators } from './dictionary';
+import { tailwindClassTranslations } from './dictionary/static-dictionary';
+import { dynamicTranslationGenerators } from './dictionary/index';
+import { TranslationEntry } from './dictionary/types';
+import { statePrefixMap } from './dictionary/state-prefix-map';
+import { responsivePrefixMap } from './dictionary/responsive-prefix-map';
 
-// --- 既存のコマンドID ---
 const SHOW_CLASSES_COMMAND = 'read-tailwind.showClasses';
-// --- 新しいコマンドID ---
 const REVERSE_SEARCH_CLASSES_COMMAND = 'read-tailwind.reverseSearchClasses'; // 逆引き検索用
+
+function splitResponsivePrefix(className: string): { responsivePrefix: string; rest: string } {
+  for (const prefix in responsivePrefixMap) {
+    if (className.startsWith(prefix)) {
+      return { responsivePrefix: prefix, rest: className.slice(prefix.length) };
+    }
+  }
+  return { responsivePrefix: '', rest: className };
+}
+
+function decorateDescription(className: string, description: string): string {
+  // レスポンシブ対応
+  const { responsivePrefix, rest } = splitResponsivePrefix(className);
+  let desc = description;
+  // 状態バリアント対応
+  for (const prefix in statePrefixMap) {
+    if (rest.startsWith(prefix)) {
+      desc = statePrefixMap[prefix] + desc;
+      break;
+    }
+  }
+  if (responsivePrefix) {
+    desc = responsivePrefixMap[responsivePrefix] + desc;
+  }
+  return desc;
+}
 
 // --- 逆引き検索ハンドラ ---
 async function reverseSearchClassesHandler() {
@@ -14,7 +42,11 @@ async function reverseSearchClassesHandler() {
   for (const className in tailwindClassTranslations) {
     if (Object.prototype.hasOwnProperty.call(tailwindClassTranslations, className)) {
       const entry = tailwindClassTranslations[className];
-      allSearchableItems.push({ className, ...entry });
+      allSearchableItems.push({
+        className,
+        css: entry.css,
+        description: decorateDescription(className, entry.description),
+      });
     }
   }
 
@@ -27,7 +59,11 @@ async function reverseSearchClassesHandler() {
         if (match) {
           const entry = generatorConfig.generator(className, match);
           if (entry) {
-            allSearchableItems.push({ className, ...entry });
+            allSearchableItems.push({
+              className,
+              css: entry.css,
+              description: decorateDescription(className, entry.description),
+            });
           }
         }
       }
@@ -80,43 +116,47 @@ async function reverseSearchClassesHandler() {
 
 
 export function activate(context: vscode.ExtensionContext) {
-  // --- 既存のコマンド ---
+  //クラス詳細表示コマンド
   const showClassesCommand = vscode.commands.registerCommand(SHOW_CLASSES_COMMAND, (classText: string, line: number) => {
     const classList = classText.split(/\s+/).filter(c => c);
     if (classList.length === 0) {
       vscode.window.showInformationMessage(`この行（${line + 1}行目）にクラスは見つかりませんでした。`);
     } else {
       const quickPickItems: vscode.QuickPickItem[] = classList.map(className => {
-        let entry: TranslationEntry | null = tailwindClassTranslations[className];
+        const { responsivePrefix, rest } = splitResponsivePrefix(className);
+        let entry: TranslationEntry | null = tailwindClassTranslations[rest];
         if (!entry) {
           for (const dynamicGen of dynamicTranslationGenerators) {
-            const match = className.match(dynamicGen.regex);
+            const match = rest.match(dynamicGen.regex);
             if (match) {
-              entry = dynamicGen.generator(className, match);
-              if (entry) break;
+              entry = dynamicGen.generator(rest, match);
+              break;
             }
           }
         }
         if (entry) {
           return {
-            label: className,
-            detail: entry.description
+            label: `🛠️ ${className}`,
+            description: `🎨 ${entry.css.split('\n')[1]?.trim() || entry.css.split('\n')[0]}...`,
+            detail: `📖 ${decorateDescription(className, entry.description)}`
           };
         } else {
           return {
-            label: className,
-            description: 'CSSプロパティや日本語訳が見つかりません。',
+            label: `🛠️ ${className}`,
+            description: '',
+            detail: '📖 未対応または不明なクラスです'
           };
         }
       });
       vscode.window.showQuickPick(quickPickItems, {
-        placeHolder: `${line + 1}行目のクラス一覧 (日本語訳付き)`,
-        canPickMany: false,
+        placeHolder: `クラス一覧（${classList.length}件） - 詳細を確認できます`,
+        matchOnDescription: true,
+        matchOnDetail: true
       });
     }
   });
 
-  // --- 新しい逆引き検索コマンドの登録 ---
+  //逆引き検索コマンド
   const reverseSearchCommandDisposable = vscode.commands.registerCommand(REVERSE_SEARCH_CLASSES_COMMAND, reverseSearchClassesHandler);
 
   const codeLensProvider = new TailwindClassLensProvider();
@@ -127,12 +167,12 @@ export function activate(context: vscode.ExtensionContext) {
   ];
   context.subscriptions.push(
     showClassesCommand,
-    reverseSearchCommandDisposable, // 新しいコマンドを登録
+    reverseSearchCommandDisposable,
     vscode.languages.registerCodeLensProvider(selector, codeLensProvider)
   );
 }
 
-// CodeLensProvider クラスの定義 (変更なし)
+// CodeLensProvider クラスの定義
 class TailwindClassLensProvider implements vscode.CodeLensProvider {
   onDidChangeCodeLenses?: vscode.Event<void>;
   provideCodeLenses(document: vscode.TextDocument): vscode.CodeLens[] {

@@ -1,71 +1,41 @@
-# read-tailwind README
+# Japanese Tailwind Dictionary README
 
-This is the README for your extension "read-tailwind". After writing up a brief description, we recommend including the following sections.
+## 🚀 概要
 
-## Features
+**Japanese Tailwind Dictionary**は、Tailwind CSSのクラスを「日本語で逆引き検索」できる拡張機能です。
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- 💡 クラス名・CSS・日本語説明から一発検索！
+- 🧩 主要なTailwindクラスを網羅（色・フォント・装飾・レイアウト・レスポンシブ…）
+- 🖱️ エディタ右上のアイコンやコマンドパレットから即アクセス
+- 📝 日本語で分かりやすい解説付き
+---
 
-For example if there is an image subfolder under your extension project workspace:
+## ✨ 主な特徴
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+- **Tailwind CSSの全主要クラスに対応**
+- **クラス名・CSS・日本語説明のどれでも検索可能**
+- **VSCodeの右上アイコンからワンクリックで逆引き検索**
+- **レスポンシブ・状態バリアントも日本語で分かる**
 
 ---
 
-## Following extension guidelines
+## 🛠️ 使い方
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+1. **クラス逆引き検索**
+   - エディタ右上のTailwindアイコンをクリック
+   - またはコマンドパレット（`Ctrl+Shift+P`）で「Tailwind: CSS/日本語説明からクラスを逆引き検索」を探して実行
+   - 検索ボックスに「中央揃え」「p-4」「width: 100%」などを入力
+   - 一致するTailwindクラスが一覧表示されます
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+---
 
-## Working with Markdown
+## 🏷️ 対応クラス例
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+- レイアウト: `flex`, `grid`, `gap-4`, `order-2`, `aspect-video` など
+- 色・装飾: `bg-red-500`, `text-blue-700`, `border-2`, `rounded-lg`, `opacity-75` など
+- フォント: `font-bold`, `font-mono`, `text-xl`, `tracking-wide`, `leading-tight` など
+- 状態・レスポンシブ: `hover:bg-blue-500`, `md:text-lg`, `focus:ring-2` など
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+随時追加予定
 
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+---
